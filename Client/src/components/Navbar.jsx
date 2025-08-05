@@ -1,12 +1,11 @@
-// src/components/Navbar.jsx
 import { useState, useContext } from "react";
-import { Link, NavLink } from "react-router"; // Updated to react-router-dom
+import { Link, NavLink } from "react-router";
 import { Logo } from "../assets";
 import { IoWalletOutline } from "react-icons/io5";
 import { MdMenu, MdClose } from "react-icons/md";
 import { useAppKit } from "@reown/appkit/react";
 import { useSwitchChain } from "wagmi";
-import { WalletContext } from "../context/WalletContext";
+import { WalletContext } from "./../Context/WalletContext";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -16,16 +15,16 @@ const Navbar = () => {
 
   const handleConnect = () => {
     if (walletState.isConnected && walletState.chainId !== 2710) {
-      switchChain({ chainId: 2710 }); // Switch to Morph Holesky
+      switchChain({ chainId: 2710 });
     } else {
-      open(); // Open AppKit modal
+      open();
     }
-    if (toggle) setToggle(false); // Close mobile menu on connect
+    if (toggle) setToggle(false);
   };
 
   const handleDisconnect = () => {
     disconnectWallet();
-    if (toggle) setToggle(false); // Close mobile menu on disconnect
+    if (toggle) setToggle(false);
   };
 
   return (
