@@ -1,4 +1,3 @@
-// src/wagmiConfig.js
 import { http, createConfig } from "wagmi";
 import { walletConnect, injected, coinbaseWallet } from "wagmi/connectors";
 import { defineChain } from "@reown/appkit/networks";
@@ -6,14 +5,14 @@ import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 
 // Define Morph Holesky Testnet
 export const morphHolesky = defineChain({
-  id: 2710,
+  id: 2810,
   name: "Morph Holesky",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-  rpcUrls: { default: { http: ["https://rpc-holesky.morph.io"] } },
+  rpcUrls: { default: { http: ["https://rpc-quicknode-holesky.morphl2.io"] } },
   blockExplorers: {
     default: {
       name: "Morph Explorer",
-      url: "https://explorer-holesky.morph.io",
+      url: "https://explorer-holesky.morphl2.io",
     },
   },
   chainNamespace: "eip155",
@@ -33,9 +32,9 @@ export const config = createConfig({
   connectors: [
     injected(),
     walletConnect({ projectId }),
-    coinbaseWallet({ appName: "My dApp" }),
+    coinbaseWallet({ appName: "Guard wallet" }),
   ],
   transports: {
-    [morphHolesky.id]: http("https://rpc-holesky.morph.io"),
+    [morphHolesky.id]: http("https://rpc-quicknode-holesky.morphl2.io"),
   },
 });

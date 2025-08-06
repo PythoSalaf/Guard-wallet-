@@ -2,8 +2,25 @@ import { Link } from "react-router";
 import { AI, Circle, Cloud, Hero, Logo, Multi, Send, Smart } from "../assets";
 import { Navbar } from "../components";
 import { IoWalletOutline } from "react-icons/io5";
+import { useAppKit } from "@reown/appkit/react";
+import { useSwitchChain } from "wagmi";
+import { useContext } from "react";
+import { WalletContext } from "../Context/WalletContext";
 
 const Home = () => {
+  const { open } = useAppKit();
+  const { switchChain } = useSwitchChain();
+  const { walletState, disconnectWallet } = useContext(WalletContext);
+  const handleConnect = () => {
+    if (walletState.isConnected && walletState.chainId !== 2810) {
+      switchChain({ chainId: 2810 });
+    } else {
+      open();
+    }
+  };
+  const handleDisconnect = () => {
+    disconnectWallet();
+  };
   const features = [
     {
       id: 1,
@@ -62,13 +79,23 @@ const Home = () => {
               smart-chain validation to prevent costly mistakes.
             </p>
             <div className="mt-4 md:mt-8 flex items-center gap-x-8">
-              <button
-                className="bg-[#1E3A8A] text-white rounded-md px-3 hover:bg-[#0e235d] cursor-pointer flex items-center gap-x-1.5 py-2 text-sm md:text-base"
-                // onClick={() => setIsOpen(true)}
-              >
-                <IoWalletOutline className="size-5" />
-                Connect Wallet
-              </button>
+              {walletState.isConnected ? (
+                <button
+                  className="bg-[#1E3A8A] text-white rounded-md px-3 hover:bg-[#0e235d] cursor-pointer flex items-center gap-x-1.5 py-2 text-sm md:text-base"
+                  onClick={handleDisconnect}
+                >
+                  <IoWalletOutline className="size-5" />
+                  Disconnect Wallet
+                </button>
+              ) : (
+                <button
+                  className="bg-[#1E3A8A] text-white rounded-md px-3 hover:bg-[#0e235d] cursor-pointer flex items-center gap-x-1.5 py-2 text-sm md:text-base"
+                  onClick={handleConnect}
+                >
+                  <IoWalletOutline className="size-5" />
+                  Connect Wallet
+                </button>
+              )}
               <button className="border text-sm md:text-base border-[#6610EC] px-8 md:px-4.5 py-2 rounded-md">
                 Learn More
               </button>

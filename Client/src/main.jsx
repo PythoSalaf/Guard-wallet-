@@ -13,6 +13,7 @@ import {
 import { WalletProvider } from "./Context/WalletContext";
 import App from "./App";
 import "./index.css";
+import { Logo } from "./assets";
 
 const queryClient = new QueryClient();
 
@@ -21,10 +22,10 @@ createAppKit({
   networks: [morphHolesky],
   projectId,
   metadata: {
-    name: "My dApp",
+    name: "Guard wallet",
     description: "My Web3 dApp with Morph Network",
-    url: "https://my-dapp.com",
-    icons: ["https://my-dapp.com/icon.png"],
+    url: "https://guard-wallet.vercel.app/",
+    icons: [`${Logo}`],
   },
   themeMode: "light",
   themeVariables: {
@@ -38,9 +39,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <WalletProvider>
-          <BrowserRouter
-            future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-          >
+          <BrowserRouter>
             <App />
           </BrowserRouter>
         </WalletProvider>

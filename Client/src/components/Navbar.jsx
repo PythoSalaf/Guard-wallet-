@@ -14,8 +14,8 @@ const Navbar = () => {
   const { switchChain } = useSwitchChain();
 
   const handleConnect = () => {
-    if (walletState.isConnected && walletState.chainId !== 2710) {
-      switchChain({ chainId: 2710 });
+    if (walletState.isConnected && walletState.chainId !== 2810) {
+      switchChain({ chainId: 2810 });
     } else {
       open();
     }
@@ -63,18 +63,12 @@ const Navbar = () => {
         <div className="hidden md:block">
           {walletState.isConnected ? (
             <div className="flex items-center gap-x-2">
-              <span className="text-white text-sm">
-                {`${walletState.address.slice(
-                  0,
-                  6
-                )}...${walletState.address.slice(-4)}`}
-              </span>
               <button
                 className="bg-[#1E3A8A] hover:bg-[#0e235d] text-white py-2 px-3 rounded-md cursor-pointer flex items-center gap-x-1.5"
                 onClick={handleDisconnect}
               >
                 <IoWalletOutline className="size-5" />
-                Disconnect
+                Disconnect wallet
               </button>
             </div>
           ) : (
@@ -122,12 +116,7 @@ const Navbar = () => {
                   className="bg-[#0A132E] text-sm px-3 rounded-lg py-1.5 mt-6"
                   onClick={handleDisconnect}
                 >
-                  Disconnect (
-                  {`${walletState.address.slice(
-                    0,
-                    6
-                  )}...${walletState.address.slice(-4)}`}
-                  )
+                  Disconnect Wallet
                 </button>
               ) : (
                 <button
